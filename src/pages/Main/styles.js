@@ -25,6 +25,8 @@ export const Input = styled.TextInput.attrs({
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   padding: 0 15px;
+  border-width: 1px;
+  border-color: ${props => (props.error ? '#d45353' : '#444')};
 `;
 
 export const SubmitButton = styled.View`
@@ -50,12 +52,7 @@ export const List = styled.FlatList.attrs({
   flex: 1;
 `;
 
-export const User = styled(RectButton)`
-  flex: 1;
-`;
-
-export const UserInner = styled.View`
-  flex: 1;
+export const User = styled.View`
   padding: 20px;
   border-bottom-width: ${props => (props.lastItem ? '0' : '1px')};
   border-color: #444;

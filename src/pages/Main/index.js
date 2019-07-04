@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { RectButton } from 'react-native-gesture-handler';
 import api from '../../services/api';
 
 import {
@@ -13,7 +14,6 @@ import {
   SubmitButtonInner,
   List,
   User,
-  UserInner,
   UserInfo,
   Avatar,
   Name,
@@ -36,6 +36,7 @@ export default class Main extends Component {
     newUser: '',
     users: [],
     loading: false,
+    error: false,
   };
 
   async componentDidMount() {
@@ -61,20 +62,31 @@ export default class Main extends Component {
 
     this.setState({ loading: true });
 
-    const response = await api.get(`/users/${newUser}`);
+    try {
+      const response = await api.get(`/users/${newUser}`);
 
-    const data = {
-      name: response.data.name,
-      login: response.data.login,
-      bio: response.data.bio,
-      avatar: response.data.avatar_url,
-    };
+      if (users.find(user => user.name === response.data.name)) {
+        throw new Error('User already added to the list.');
+      }
 
-    this.setState({
-      users: [...users, data],
-      newUser: '',
-      loading: false,
-    });
+      const data = {
+        name: response.data.name,
+        login: response.data.login,
+        bio: response.data.bio,
+        avatar: response.data.avatar_url,
+      };
+
+      this.setState({
+        users: [...users, data],
+        newUser: '',
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({
+        loading: false,
+        error: true,
+      });
+    }
 
     Keyboard.dismiss();
   };
@@ -86,7 +98,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const { users, newUser, loading } = this.state;
+    const { users, newUser, loading, error } = this.state;
 
     return (
       <Container>
@@ -96,9 +108,12 @@ export default class Main extends Component {
             autoCapitalize="none"
             placeholder="Add user"
             value={newUser}
-            onChangeText={text => this.setState({ newUser: text })}
+            onChangeText={text =>
+              this.setState({ newUser: text, error: false })
+            }
             returnKeyType="send"
             onSubmitEditing={this.handleAddUser}
+            error={error}
           />
           <SubmitButton>
             <SubmitButtonInner loading={loading} onPress={this.handleAddUser}>
@@ -115,16 +130,16 @@ export default class Main extends Component {
           data={users}
           keyExtractor={user => user.login}
           renderItem={({ item, index }) => (
-            <User onPress={() => this.handleNavigate(item)}>
-              <UserInner lastItem={index === users.length - 1}>
+            <RectButton onPress={() => this.handleNavigate(item)}>
+              <User lastItem={index === users.length - 1}>
                 <Avatar source={{ uri: item.avatar }} />
                 <UserInfo>
                   <Name>{item.name}</Name>
                   {item.bio && <Bio>{item.bio}</Bio>}
                 </UserInfo>
                 <ArrowIcon name="keyboard-arrow-right" size={24} color="#666" />
-              </UserInner>
-            </User>
+              </User>
+            </RectButton>
           )}
         />
       </Container>
