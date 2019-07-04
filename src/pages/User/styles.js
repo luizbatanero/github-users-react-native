@@ -63,7 +63,7 @@ export const OwnerAvatar = styled.Image`
   height: 42px;
   width: 42px;
   border-radius: 21px;
-  background: #444;
+  background: #fff;
 `;
 
 export const Info = styled.View`
