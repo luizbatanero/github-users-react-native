@@ -1,63 +1,84 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const Container = styled.View`
   flex: 1;
-  padding: 30px;
+  background: #333;
 `;
 
 export const Form = styled.View`
   flex-direction: row;
   padding-bottom: 20px;
   border-bottom-width: 1px;
-  border-color: #eee;
+  border-color: #444;
+  padding: 20px;
 `;
 
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: '#999',
 })`
   flex: 1;
-  height: 40px;
-  background: #eee;
-  border-radius: 4px;
+  height: 50px;
+  background: #444;
+  color: #fff;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   padding: 0 15px;
-  border: 1px solid #eee;
 `;
 
-export const SubmitButton = styled(RectButton)`
+export const SubmitButton = styled.View`
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   background: #7159c1;
-  border-radius: 4px;
-  margin-left: 10px;
-  padding: 0 12px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
   opacity: ${props => (props.loading ? 0.7 : 1)};
+`;
+
+export const SubmitButtonInner = styled(RectButton)`
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
 `;
 
 export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
-  margin-top: 20px;
+  flex: 1;
 `;
 
-export const User = styled.View`
+export const User = styled(RectButton)`
+  flex: 1;
+`;
+
+export const UserInner = styled.View`
+  flex: 1;
+  padding: 20px;
+  border-bottom-width: ${props => (props.lastItem ? '0' : '1px')};
+  border-color: #444;
+  flex-direction: row;
   align-items: center;
-  margin: 0 20px 30px;
+`;
+
+export const UserInfo = styled.View`
+  flex-shrink: 1;
 `;
 
 export const Avatar = styled.Image`
   width: 64px;
   height: 64px;
   border-radius: 32px;
-  background: #eee;
+  background: #444;
+  margin-right: 12px;
 `;
 
 export const Name = styled.Text`
   font-size: 14px;
-  color: #333;
+  color: #eee;
   font-weight: bold;
-  margin-top: 5px;
-  text-align: center;
 `;
 
 export const Bio = styled.Text.attrs({
@@ -67,22 +88,9 @@ export const Bio = styled.Text.attrs({
   line-height: 18px;
   color: #999;
   margin-top: 5px;
-  text-align: center;
+  padding-right: 20px;
 `;
 
-export const ProfileButton = styled(RectButton)`
-  margin-top: 10px;
-  align-self: stretch;
-  border-radius: 4px;
-  background: #7159c1;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-`;
-
-export const ProfileButtonText = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-  text-transform: uppercase;
+export const ArrowIcon = styled(Icon)`
+  margin-left: auto;
 `;

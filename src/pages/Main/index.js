@@ -10,18 +10,20 @@ import {
   Form,
   Input,
   SubmitButton,
+  SubmitButtonInner,
   List,
   User,
+  UserInner,
+  UserInfo,
   Avatar,
   Name,
   Bio,
-  ProfileButton,
-  ProfileButtonText,
+  ArrowIcon,
 } from './styles';
 
 export default class Main extends Component {
   static navigationOptions = {
-    title: 'Usuários',
+    title: 'Users',
   };
 
   static propTypes = {
@@ -92,33 +94,36 @@ export default class Main extends Component {
           <Input
             autoCorrect={false}
             autoCapitalize="none"
-            placeholder="Adicionar usuário"
+            placeholder="Add user"
             value={newUser}
             onChangeText={text => this.setState({ newUser: text })}
             returnKeyType="send"
             onSubmitEditing={this.handleAddUser}
           />
-          <SubmitButton loading={loading} onPress={this.handleAddUser}>
-            {loading ? (
-              <ActivityIndicator color="#FFF" />
-            ) : (
-              <Icon name="add" size={20} color="#fff" />
-            )}
+          <SubmitButton>
+            <SubmitButtonInner loading={loading} onPress={this.handleAddUser}>
+              {loading ? (
+                <ActivityIndicator color="#FFF" />
+              ) : (
+                <Icon name="add" size={20} color="#fff" />
+              )}
+            </SubmitButtonInner>
           </SubmitButton>
         </Form>
 
         <List
           data={users}
           keyExtractor={user => user.login}
-          renderItem={({ item }) => (
-            <User>
-              <Avatar source={{ uri: item.avatar }} />
-              <Name>{item.name}</Name>
-              {item.bio && <Bio>{item.bio}</Bio>}
-
-              <ProfileButton onPress={() => this.handleNavigate(item)}>
-                <ProfileButtonText>Ver perfil</ProfileButtonText>
-              </ProfileButton>
+          renderItem={({ item, index }) => (
+            <User onPress={() => this.handleNavigate(item)}>
+              <UserInner lastItem={index === users.length - 1}>
+                <Avatar source={{ uri: item.avatar }} />
+                <UserInfo>
+                  <Name>{item.name}</Name>
+                  {item.bio && <Bio>{item.bio}</Bio>}
+                </UserInfo>
+                <ArrowIcon name="keyboard-arrow-right" size={24} color="#666" />
+              </UserInner>
             </User>
           )}
         />
