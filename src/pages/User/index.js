@@ -35,8 +35,7 @@ export default class User extends Component {
   };
 
   componentDidMount() {
-    this.setState({ loading: true });
-    this.loadStars();
+    this.refreshList();
   }
 
   loadStars = async (page = 1) => {
@@ -56,6 +55,11 @@ export default class User extends Component {
   loadMore = () => {
     const { page } = this.state;
     this.loadStars(page + 1);
+  };
+
+  refreshList = () => {
+    this.setState({ loading: true });
+    this.loadStars();
   };
 
   render() {
@@ -89,6 +93,8 @@ export default class User extends Component {
             )}
             onEndReachedThreshold={0.2}
             onEndReached={this.loadMore}
+            onRefresh={this.refreshList}
+            refreshing={this.state.loading}
           />
         )}
       </Container>
