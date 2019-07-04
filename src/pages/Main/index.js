@@ -23,7 +23,7 @@ import {
 
 export default class Main extends Component {
   static navigationOptions = {
-    title: 'Users',
+    title: 'GitHub Users',
   };
 
   static propTypes = {
