@@ -5,25 +5,26 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   padding: 30px;
+  background: #333;
 `;
 
 export const Header = styled.View`
   align-items: center;
   padding-bottom: 20px;
   border-bottom-width: 1px;
-  border-color: #eee;
+  border-color: #444;
 `;
 
 export const Avatar = styled.Image`
   width: 100px;
   height: 100px;
   border-radius: 50px;
-  background: #eee;
+  background: #444;
 `;
 
 export const Name = styled.Text`
   font-size: 20px;
-  color: #333;
+  color: #eee;
   font-weight: bold;
   margin-top: 10px;
   text-align: center;
@@ -50,7 +51,7 @@ export const Stars = styled.FlatList.attrs({
 `;
 
 export const Starred = styled(RectButton)`
-  background: #f5f5f5;
+  background: #444;
   border-radius: 4px;
   padding: 10px 15px;
   margin-bottom: 20px;
@@ -62,7 +63,7 @@ export const OwnerAvatar = styled.Image`
   height: 42px;
   width: 42px;
   border-radius: 21px;
-  background: #eee;
+  background: #444;
 `;
 
 export const Info = styled.View`
@@ -75,11 +76,11 @@ export const Title = styled.Text.attrs({
 })`
   font-size: 15px;
   font-weight: bold;
-  color: #333;
+  color: #fff;
 `;
 
 export const Author = styled.Text`
   font-size: 13px;
-  color: #666;
+  color: #888;
   margin-top: 2px;
 `;
