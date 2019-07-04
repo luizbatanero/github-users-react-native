@@ -1,3 +1,4 @@
+import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -33,6 +34,12 @@ export const Bio = styled.Text`
   color: #999;
   margin-top: 5px;
   text-align: center;
+`;
+
+export const Loading = styled(ActivityIndicator).attrs({
+  color: '#7159c1',
+})`
+  margin-top: 20px;
 `;
 
 export const Stars = styled.FlatList.attrs({
