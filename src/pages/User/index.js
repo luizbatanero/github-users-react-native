@@ -15,6 +15,7 @@ import {
   Info,
   Title,
   Author,
+  LoadingMore,
 } from './styles';
 
 export default class User extends Component {
@@ -32,6 +33,7 @@ export default class User extends Component {
   state = {
     stars: [],
     loading: false,
+    loadingMore: false,
     page: 1,
   };
 
@@ -51,11 +53,13 @@ export default class User extends Component {
       stars: [...stars, ...response.data],
       page,
       loading: false,
+      loadingMore: false,
     });
   };
 
   loadMore = () => {
     const { page } = this.state;
+    this.setState({ loadingMore: true });
     this.loadStars(page + 1);
   };
 
@@ -72,7 +76,7 @@ export default class User extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { stars, loading } = this.state;
+    const { stars, loading, loadingMore } = this.state;
 
     const user = navigation.getParam('user');
 
@@ -105,6 +109,7 @@ export default class User extends Component {
             refreshing={loading}
           />
         )}
+        {loadingMore && <LoadingMore />}
       </Container>
     );
   }

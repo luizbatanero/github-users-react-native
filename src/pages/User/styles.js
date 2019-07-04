@@ -40,8 +40,17 @@ export const Bio = styled.Text`
 
 export const Loading = styled(ActivityIndicator).attrs({
   color: '#7159c1',
+  size: 'large',
 })`
   margin-top: 20px;
+`;
+
+export const LoadingMore = styled(ActivityIndicator).attrs({
+  color: '#7159c1',
+})`
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
 `;
 
 export const Stars = styled.FlatList.attrs({
