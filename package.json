@@ -9,16 +9,25 @@
   },
   "dependencies": {
     "react": "16.8.6",
-    "react-native": "0.60.0"
+    "react-native": "0.60.0",
+    "reactotron-react-native": "^3.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
     "@react-native-community/eslint-config": "^0.0.5",
+    "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
-    "eslint": "^6.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.54.1",
+    "prettier": "^1.18.2",
     "react-test-renderer": "16.8.6"
   },
   "jest": {
