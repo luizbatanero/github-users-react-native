@@ -35,6 +35,7 @@ export default class User extends Component {
     loading: false,
     loadingMore: false,
     page: 1,
+    hasMore: false,
   };
 
   componentDidMount() {
@@ -47,20 +48,34 @@ export default class User extends Component {
     const { stars } = this.state;
     const user = navigation.getParam('user');
 
-    const response = await api.get(`/users/${user.login}/starred?page=${page}`);
+    try {
+      const response = await api.get(
+        `/users/${user.login}/starred?page=${page}`
+      );
 
-    this.setState({
-      stars: [...stars, ...response.data],
-      page,
-      loading: false,
-      loadingMore: false,
-    });
+      this.setState({
+        stars: [...stars, ...response.data],
+        page,
+        loading: false,
+        loadingMore: false,
+        hasMore:
+          response.headers.link && response.headers.link.includes('next'),
+      });
+    } catch (err) {
+      this.setState({
+        loading: false,
+        loadingMore: false,
+      });
+    }
   };
 
   loadMore = () => {
-    const { page } = this.state;
-    this.setState({ loadingMore: true });
-    this.loadStars(page + 1);
+    const { page, hasMore } = this.state;
+
+    if (hasMore) {
+      this.setState({ loadingMore: true });
+      this.loadStars(page + 1);
+    }
   };
 
   refreshList = async () => {
