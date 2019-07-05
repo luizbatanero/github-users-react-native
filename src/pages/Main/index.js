@@ -91,10 +91,19 @@ export default class Main extends Component {
     Keyboard.dismiss();
   };
 
+  handleRemoveUser = userName => {
+    this.setState(state => ({
+      users: state.users.filter(user => user.name !== userName),
+    }));
+  };
+
   handleNavigate = user => {
     const { navigation } = this.props;
 
-    navigation.navigate('User', { user });
+    navigation.navigate('User', {
+      user,
+      removeUser: () => this.handleRemoveUser(user.name),
+    });
   };
 
   render() {
@@ -137,7 +146,7 @@ export default class Main extends Component {
                   <Name>{item.name}</Name>
                   {item.bio && <Bio>{item.bio}</Bio>}
                 </UserInfo>
-                <ArrowIcon name="keyboard-arrow-right" size={24} color="#666" />
+                <ArrowIcon name="keyboard-arrow-right" />
               </User>
             </RectButton>
           )}

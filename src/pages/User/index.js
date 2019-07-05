@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { RectButton } from 'react-native-gesture-handler';
+
 import api from '../../services/api';
 
 import {
@@ -8,6 +10,8 @@ import {
   Avatar,
   Name,
   Bio,
+  TrashButton,
+  TrashIcon,
   Loading,
   Stars,
   Starred,
@@ -89,6 +93,13 @@ export default class User extends Component {
     navigation.navigate('Repo', { repo });
   };
 
+  handleRemove = () => {
+    const { navigation } = this.props;
+
+    navigation.getParam('removeUser')();
+    navigation.navigate('Main');
+  };
+
   render() {
     const { navigation } = this.props;
     const { stars, loading, loadingMore } = this.state;
@@ -101,6 +112,9 @@ export default class User extends Component {
           <Avatar source={{ uri: user.avatar }} />
           <Name>{user.name}</Name>
           {user.bio && <Bio>{user.bio}</Bio>}
+          <TrashButton onPress={this.handleRemove}>
+            <TrashIcon name="trash-o" />
+          </TrashButton>
         </Header>
 
         {loading ? (

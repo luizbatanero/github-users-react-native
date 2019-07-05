@@ -1,5 +1,7 @@
 import { ActivityIndicator } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -13,6 +15,7 @@ export const Header = styled.View`
   padding-bottom: 20px;
   border-bottom-width: 1px;
   border-color: #444;
+  position: relative;
 `;
 
 export const Avatar = styled.Image`
@@ -37,6 +40,23 @@ export const Bio = styled.Text`
   margin-top: 5px;
   text-align: center;
 `;
+
+export const TrashButton = styled(RectButton)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  align-items: center;
+  justify-content: center;
+  background: #383838;
+`;
+
+export const TrashIcon = styled(Icon).attrs({
+  size: 20,
+  color: '#666',
+})``;
 
 export const Loading = styled(ActivityIndicator).attrs({
   color: '#7159c1',

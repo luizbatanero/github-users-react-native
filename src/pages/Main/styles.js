@@ -88,6 +88,9 @@ export const Bio = styled.Text.attrs({
   padding-right: 20px;
 `;
 
-export const ArrowIcon = styled(Icon)`
+export const ArrowIcon = styled(Icon).attrs({
+  size: 24,
+  color: '#666',
+})`
   margin-left: auto;
 `;
