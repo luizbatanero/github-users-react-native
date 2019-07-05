@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { RectButton } from 'react-native-gesture-handler';
 
 import api from '../../services/api';
 

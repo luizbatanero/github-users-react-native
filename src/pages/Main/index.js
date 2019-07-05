@@ -53,6 +53,12 @@ export default class Main extends Component {
     if (prevState.users !== users) {
       AsyncStorage.setItem('users', JSON.stringify(users));
     }
+
+    if (prevState.users.length < users.length) {
+      setTimeout(() => {
+        this.listView.scrollToEnd();
+      }, 200);
+    }
   }
 
   handleAddUser = async () => {
@@ -76,7 +82,7 @@ export default class Main extends Component {
         avatar: response.data.avatar_url,
       };
 
-      this.setState({
+      await this.setState({
         users: [...users, data],
         newUser: '',
         loading: false,
@@ -138,6 +144,9 @@ export default class Main extends Component {
         <List
           data={users}
           keyExtractor={user => user.login}
+          ref={listView => {
+            this.listView = listView;
+          }}
           renderItem={({ item, index }) => (
             <RectButton onPress={() => this.handleNavigate(item)}>
               <User lastItem={index === users.length - 1}>
