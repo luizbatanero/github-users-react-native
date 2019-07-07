@@ -7,7 +7,7 @@ import { ProgressBar } from './styles';
 export default class WebViewProgress extends Component {
   static propTypes = {
     source: PropTypes.shape({
-      ui: PropTypes.string,
+      uri: PropTypes.string,
     }).isRequired,
   };
 
